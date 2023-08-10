@@ -6,58 +6,80 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class RegistrationFormTests extends TestBase{
-    private RegistrationPage registrationPage = new RegistrationPage();
-    private RandomUtils randomUtils = new RandomUtils();
-    private String registrationPageUrl = "/automation-practice-form";
-    String firstName = randomUtils.getRandomString(10),
-            lastName = randomUtils.getRandomString(10),
-            email = randomUtils.getRandomEmail();
+public class RegistrationFormTests extends TestBase {
+    private final RegistrationPage registrationPage = new RegistrationPage();
+    private final RandomUtils randomUtils = new RandomUtils();
+    private final String registrationPageUrl = "/automation-practice-form";
+
 
     @Test
     void registrationFormSuccessTest() {
+        String firstName = randomUtils.getRandomFirstName(),
+                lastName = randomUtils.getRandomLastName(),
+                email = randomUtils.getRandomEmail(),
+                gender = randomUtils.getRandomGender(),
+                phone = randomUtils.getFakerPhone(),
+                subject = randomUtils.getRandomSubject(),
+                hobby = randomUtils.getRandomHobby(),
+                address = randomUtils.getRandomAddress(),
+                day = randomUtils.getRandomDayOfAMonth(),
+                month = randomUtils.getRandomMonth(),
+                year = randomUtils.getRandomYear();
         registrationPage
                 .openPage(registrationPageUrl)
                 .waitUntilRegistrationPageIsLoaded()
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setEmail(email)
-                .setUserNumber("1234567890")
-                .selectGender("Female")
-                .setBirthDate("30", "July", "1989")
-                .setSubject("Hindi")
-                .setHobby("Sports")
+                .setUserNumber(phone)
+                .selectGender(gender)
+                .setBirthDate(day, month, year)
+                .setSubject(subject)
+                .setHobby(hobby)
                 .uploadFile("test.jpg")
-                .setAddress("Лукоморье, Дуб Зеленый, 1")
-                .selectState("NCR")
-                .selectCity("Delhi")
+                .setAddress(address);
+
+        List<String> states = registrationPage.getStates();
+        String state = randomUtils.getRandomItemFromList(states);
+
+        registrationPage
+                .selectState(state);
+        List<String> cities = registrationPage.getCities();
+        String city = randomUtils.getRandomItemFromList(cities);
+        registrationPage
+                .selectCity(city)
                 .submitForm()
                 .waitModalWindowIsOpened()
                 .checkValueNextToColumnInTableInModalWindow("Student Name", firstName + " " + lastName)
                 .checkValueNextToColumnInTableInModalWindow("Student Email", email)
-                .checkValueNextToColumnInTableInModalWindow("Gender", "Female")
-                .checkValueNextToColumnInTableInModalWindow("Mobile", "1234567890")
-                .checkValueNextToColumnInTableInModalWindow("Date of Birth", "30 July,1989")
-                .checkValueNextToColumnInTableInModalWindow("Subjects", "Hindi")
-                .checkValueNextToColumnInTableInModalWindow("Hobbies", "Sports")
+                .checkValueNextToColumnInTableInModalWindow("Gender", gender)
+                .checkValueNextToColumnInTableInModalWindow("Mobile", phone)
+                .checkValueNextToColumnInTableInModalWindow("Date of Birth", day + " " + month + "," + year)
+                .checkValueNextToColumnInTableInModalWindow("Subjects", subject)
+                .checkValueNextToColumnInTableInModalWindow("Hobbies", hobby)
                 .checkValueNextToColumnInTableInModalWindow("Picture", "test.jpg")
-                .checkValueNextToColumnInTableInModalWindow("Address", "Лукоморье, Дуб Зеленый, 1")
-                .checkValueNextToColumnInTableInModalWindow("State and City", "NCR Delhi");
-
+                .checkValueNextToColumnInTableInModalWindow("Address", address)
+                .checkValueNextToColumnInTableInModalWindow("State and City", state + " " + city);
     }
 
     @Test
     void registrationFormSuccessMinimalTest() {
+        String firstName = randomUtils.getRandomFirstName(),
+                lastName = randomUtils.getRandomLastName(),
+                email = randomUtils.getRandomEmail(),
+                gender = randomUtils.getRandomGender(),
+                phone = randomUtils.getFakerPhone();
+
         registrationPage
                 .openPage(registrationPageUrl)
                 .waitUntilRegistrationPageIsLoaded()
-                .setFirstName("Василиса")
-                .setLastName("Премудрая")
-                .setEmail("pretty_vasya@mail.com")
-                .setUserNumber("1234567890")
-                .selectGender("Female")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setEmail(email)
+                .setUserNumber(phone)
+                .selectGender(gender)
                 .submitForm()
                 .waitModalWindowIsOpened()
-                .checkModalWindowHasText(List.of("Василиса", "Премудрая", "1234567890", "Female"));
+                .checkModalWindowHasText(List.of(firstName, lastName, phone, gender));
     }
 }

@@ -4,8 +4,8 @@ import com.demopqa.pages.TextBoxPage;
 import org.junit.jupiter.api.Test;
 
 public class TextBoxTests extends TestBase {
-    private TextBoxPage textBoxPage = new TextBoxPage();
-    private String textBoxPageUrl = "/text-box";
+    private final TextBoxPage textBoxPage = new TextBoxPage();
+    private final String textBoxPageUrl = "/text-box";
 
     @Test
     void testBoxTests() {

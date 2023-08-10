@@ -8,12 +8,12 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class TextBoxPage {
-    SelenideElement fullNameInput =  $("#userName");
+    SelenideElement fullNameInput = $("#userName");
     SelenideElement emailInput = $("#userEmail");
     SelenideElement currentAddressInput = $("#currentAddress");
-    SelenideElement permanentAddressInput =  $("#permanentAddress");
+    SelenideElement permanentAddressInput = $("#permanentAddress");
     SelenideElement submitButton = $("#submit");
-    SelenideElement textBox =  $("#output");
+    SelenideElement textBox = $("#output");
 
     public TextBoxPage openPage(String url) {
         Selenide.open(url);
@@ -21,6 +21,7 @@ public class TextBoxPage {
         executeJavaScript("$('footer').remove()");
         return this;
     }
+
     public TextBoxPage setFullName(String fullName) {
         fullNameInput.setValue(fullName);
         return this;
@@ -35,6 +36,7 @@ public class TextBoxPage {
         currentAddressInput.setValue(address);
         return this;
     }
+
     public TextBoxPage setPermanentAddress(String address) {
         permanentAddressInput.setValue(address);
         return this;

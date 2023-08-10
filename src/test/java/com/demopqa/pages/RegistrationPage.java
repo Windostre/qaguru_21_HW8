@@ -7,6 +7,7 @@ import com.codeborne.selenide.SelenideElement;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
@@ -26,11 +27,11 @@ public class RegistrationPage {
     SelenideElement modalWindow = $(".modal-dialog");
     SelenideElement modalWindowHeader = $("#example-modal-sizes-title-lg");
     SelenideElement tableInModalWindow = $(".table-responsive");
-    SelenideElement subjectInput =  $("#subjectsInput");
+    SelenideElement subjectInput = $("#subjectsInput");
     SelenideElement hobbiesCheckBox = $("#hobbiesWrapper");
     SelenideElement addressInput = $("#currentAddress");
-    SelenideElement stateDropDown =  $("#state");
-    SelenideElement cityDropDown =  $("#city");
+    SelenideElement stateDropDown = $("#state");
+    SelenideElement cityDropDown = $("#city");
     SelenideElement stateCityWrapper = $("#stateCity-wrapper");
     SelenideElement dateOfBirthInput = $("#dateOfBirthInput");
 
@@ -86,7 +87,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage checkModalWindowHasText(List <String> texts) {
+    public RegistrationPage checkModalWindowHasText(List<String> texts) {
         texts.forEach(values -> tableInModalWindow.shouldHave(text(values)));
         return this;
     }
@@ -103,6 +104,7 @@ public class RegistrationPage {
         executeJavaScript("$('footer').remove()");
         return this;
     }
+
     public RegistrationPage waitUntilRegistrationPageIsLoaded() {
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         return this;
@@ -114,8 +116,8 @@ public class RegistrationPage {
     }
 
     public RegistrationPage selectState(String state) {
-       stateDropDown.click();
-       stateCityWrapper.$(byText(state)).click();
+        stateDropDown.click();
+        stateCityWrapper.$(byText(state)).shouldBe(visible).click();
         return this;
     }
 
@@ -123,6 +125,21 @@ public class RegistrationPage {
         cityDropDown.click();
         stateCityWrapper.$(byText(city)).click();
         return this;
+    }
+
+    public List<String> getStates() {
+        stateDropDown.click();
+        List<String> states = stateCityWrapper.$$("div[id^='react-select']").texts();
+        stateDropDown.click();
+        return states;
+
+    }
+
+    public List<String> getCities() {
+        cityDropDown.click();
+        List<String> cities = cityDropDown.$$("div[id^='react-select']").texts();
+        cityDropDown.click();
+        return cities;
     }
 
     public RegistrationPage setBirthDate(String day, String month, String year) {
