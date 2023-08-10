@@ -1,22 +1,21 @@
 package com.demopqa.tests;
 
 import com.demopqa.pages.RegistrationPage;
+import com.demopqa.utils.RandomUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 public class RegistrationFormTests extends TestBase{
     private RegistrationPage registrationPage = new RegistrationPage();
+    private RandomUtils randomUtils = new RandomUtils();
     private String registrationPageUrl = "/automation-practice-form";
-    String firstName = "Василиса",
-            lastName = "Премудрая",
-            email = "pretty_vasya@mail.com";
+    String firstName = randomUtils.getRandomString(10),
+            lastName = randomUtils.getRandomString(10),
+            email = randomUtils.getRandomEmail();
 
     @Test
     void registrationFormSuccessTest() {
-//        String firstName = "Василиса",
-//                lastName = "Премудрая",
-//                email = "pretty_vasya@mail.com";
         registrationPage
                 .openPage(registrationPageUrl)
                 .waitUntilRegistrationPageIsLoaded()
@@ -34,7 +33,7 @@ public class RegistrationFormTests extends TestBase{
                 .selectCity("Delhi")
                 .submitForm()
                 .waitModalWindowIsOpened()
-                .checkValueNextToColumnInTableInModalWindow("Student Name", "Василиса Премудрая")
+                .checkValueNextToColumnInTableInModalWindow("Student Name", firstName + " " + lastName)
                 .checkValueNextToColumnInTableInModalWindow("Student Email", email)
                 .checkValueNextToColumnInTableInModalWindow("Gender", "Female")
                 .checkValueNextToColumnInTableInModalWindow("Mobile", "1234567890")
