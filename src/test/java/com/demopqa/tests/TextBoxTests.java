@@ -1,24 +1,30 @@
 package com.demopqa.tests;
 
 import com.demopqa.pages.TextBoxPage;
+import com.demopqa.utils.RandomUtils;
 import org.junit.jupiter.api.Test;
 
 public class TextBoxTests extends TestBase {
     private final TextBoxPage textBoxPage = new TextBoxPage();
+    private final RandomUtils randomUtils = new RandomUtils();
     private final String textBoxPageUrl = "/text-box";
 
     @Test
     void testBoxTests() {
+        String name = randomUtils.getRandomFirstName() + " " + randomUtils.getRandomLastName(),
+                email = randomUtils.getRandomEmail(),
+                currentAddress = randomUtils.getRandomAddress(),
+                permanentAddress = randomUtils.getRandomAddress();
         textBoxPage
                 .openPage(textBoxPageUrl)
-                .setFullName("Sveta Ivanova")
-                .setEmail("ivanova@somemail.ru")
-                .setCurrentAddress("Pushkina ul., 34")
-                .setPermanentAddress("Gogol-Mogol ul., 16a")
-                .submitForm().checkThatTextBoxHasText("Sveta Ivanova")
-                .checkThatTextBoxHasText("ivanova@somemail.ru")
-                .checkThatTextBoxHasText("Pushkina ul., 34")
-                .checkThatTextBoxHasText("Gogol-Mogol ul., 16a");
+                .setFullName(name)
+                .setEmail(email)
+                .setCurrentAddress(currentAddress)
+                .setPermanentAddress(permanentAddress)
+                .submitForm().checkThatTextBoxHasText(name)
+                .checkThatTextBoxHasText(email)
+                .checkThatTextBoxHasText(currentAddress)
+                .checkThatTextBoxHasText(permanentAddress);
 
     }
 }
