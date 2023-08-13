@@ -95,5 +95,4 @@ public class RandomUtils {
         int year = faker.number().numberBetween(1900, 2023);
         return String.valueOf(year);
     }
-
 }
