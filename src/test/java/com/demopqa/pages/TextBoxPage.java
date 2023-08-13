@@ -7,16 +7,26 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
+/**
+ * Text Box Form description
+ * <a href="https://demoqa.com/text-box">...</a>
+ */
+
 public class TextBoxPage {
-    SelenideElement fullNameInput = $("#userName");
-    SelenideElement emailInput = $("#userEmail");
-    SelenideElement currentAddressInput = $("#currentAddress");
-    SelenideElement permanentAddressInput = $("#permanentAddress");
-    SelenideElement submitButton = $("#submit");
-    SelenideElement textBox = $("#output");
+
+    SelenideElement fullNameInput = $("#userName"),
+            emailInput = $("#userEmail"),
+            currentAddressInput = $("#currentAddress"),
+            permanentAddressInput = $("#permanentAddress"),
+            submitButton = $("#submit"),
+            textBox = $("#output");
 
     public TextBoxPage openPage(String url) {
         Selenide.open(url);
+        return this;
+    }
+
+    public TextBoxPage removeBannerAndFooter() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
         return this;
@@ -42,9 +52,8 @@ public class TextBoxPage {
         return this;
     }
 
-    public TextBoxPage submitForm() {
+    public void submitForm() {
         submitButton.click();
-        return this;
     }
 
     public TextBoxPage checkThatTextBoxHasText(String expectedText) {

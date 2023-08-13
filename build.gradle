@@ -22,7 +22,6 @@ dependencies {
             "org.junit.jupiter:junit-jupiter:${junitVersion}",
             "org.slf4j:slf4j-simple:${slf4j}",
             "com.github.javafaker:javafaker:${javafaker}")
-
 }
 
 test {
@@ -30,6 +29,9 @@ test {
     useJUnitPlatform()
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
+
+compileTestJava.options.encoding = 'UTF-8' // толлько для тестов
+
+//tasks.withType(JavaCompile) { // для всех задач
+//    options.encoding = 'UTF-8'
+//}

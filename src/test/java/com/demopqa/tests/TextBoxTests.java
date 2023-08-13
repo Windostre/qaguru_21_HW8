@@ -17,14 +17,16 @@ public class TextBoxTests extends TestBase {
                 permanentAddress = randomUtils.getRandomAddress();
         textBoxPage
                 .openPage(textBoxPageUrl)
+                .removeBannerAndFooter()
                 .setFullName(name)
                 .setEmail(email)
                 .setCurrentAddress(currentAddress)
                 .setPermanentAddress(permanentAddress)
-                .submitForm().checkThatTextBoxHasText(name)
+                .submitForm();
+        textBoxPage
+                .checkThatTextBoxHasText(name)
                 .checkThatTextBoxHasText(email)
                 .checkThatTextBoxHasText(currentAddress)
                 .checkThatTextBoxHasText(permanentAddress);
-
     }
 }

@@ -17,24 +17,24 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
  * <a href="https://demoqa.com/automation-practice-form">...</a>
  */
 public class RegistrationPage {
-    CalendarComponent calendar = new CalendarComponent();
-    SelenideElement firstNameInput = $("#firstName");
-    SelenideElement lastNameInput = $("#lastName");
-    SelenideElement emailInput = $("#userEmail");
-    SelenideElement userNumberInput = $("#userNumber");
-    SelenideElement genderRadioButton = $("#genterWrapper");
-    SelenideElement submitButton = $("#submit");
-    SelenideElement modalWindow = $(".modal-dialog");
-    SelenideElement modalWindowHeader = $("#example-modal-sizes-title-lg");
-    SelenideElement tableInModalWindow = $(".table-responsive");
-    SelenideElement subjectInput = $("#subjectsInput");
-    SelenideElement hobbiesCheckBox = $("#hobbiesWrapper");
-    SelenideElement addressInput = $("#currentAddress");
-    SelenideElement stateDropDown = $("#state");
-    SelenideElement cityDropDown = $("#city");
-    SelenideElement stateCityWrapper = $("#stateCity-wrapper");
-    SelenideElement dateOfBirthInput = $("#dateOfBirthInput");
 
+    CalendarComponent calendar = new CalendarComponent();
+    SelenideElement firstNameInput = $("#firstName"),  //убарть лишние selenide element
+     lastNameInput = $("#lastName"),
+     emailInput = $("#userEmail"),
+     userNumberInput = $("#userNumber"),
+     genderRadioButton = $("#genterWrapper"),
+     submitButton = $("#submit"),
+     modalWindow = $(".modal-dialog"),
+     modalWindowHeader = $("#example-modal-sizes-title-lg"),
+     tableInModalWindow = $(".table-responsive"),
+     subjectInput = $("#subjectsInput"),
+     hobbiesCheckBox = $("#hobbiesWrapper"),
+     addressInput = $("#currentAddress"),
+     stateDropDown = $("#state"),
+     cityDropDown = $("#city"),
+     stateCityWrapper = $("#stateCity-wrapper"),
+     dateOfBirthInput = $("#dateOfBirthInput");
 
     public RegistrationPage setFirstName(String firstName) {
         firstNameInput.setValue(firstName);
@@ -76,9 +76,8 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage submitForm() {
+    public void submitForm() {
         submitButton.click();
-        return this;
     }
 
     public RegistrationPage waitModalWindowIsOpened() {
@@ -100,6 +99,10 @@ public class RegistrationPage {
 
     public RegistrationPage openPage(String url) {
         Selenide.open(url);
+               return this;
+    }
+
+    public RegistrationPage removeBannerAndFooter() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
         return this;

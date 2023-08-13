@@ -11,7 +11,6 @@ public class RegistrationFormTests extends TestBase {
     private final RandomUtils randomUtils = new RandomUtils();
     private final String registrationPageUrl = "/automation-practice-form";
 
-
     @Test
     void registrationFormSuccessTest() {
         String firstName = randomUtils.getRandomFirstName(),
@@ -27,6 +26,7 @@ public class RegistrationFormTests extends TestBase {
                 year = randomUtils.getRandomYear();
         registrationPage
                 .openPage(registrationPageUrl)
+                .removeBannerAndFooter()
                 .waitUntilRegistrationPageIsLoaded()
                 .setFirstName(firstName)
                 .setLastName(lastName)
@@ -44,11 +44,14 @@ public class RegistrationFormTests extends TestBase {
 
         registrationPage
                 .selectState(state);
+
         List<String> cities = registrationPage.getCities();
         String city = randomUtils.getRandomItemFromList(cities);
         registrationPage
                 .selectCity(city)
-                .submitForm()
+                .submitForm();
+
+        registrationPage
                 .waitModalWindowIsOpened()
                 .checkValueNextToColumnInTableInModalWindow("Student Name", firstName + " " + lastName)
                 .checkValueNextToColumnInTableInModalWindow("Student Email", email)
@@ -72,13 +75,15 @@ public class RegistrationFormTests extends TestBase {
 
         registrationPage
                 .openPage(registrationPageUrl)
+                .removeBannerAndFooter()
                 .waitUntilRegistrationPageIsLoaded()
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setEmail(email)
                 .setUserNumber(phone)
                 .selectGender(gender)
-                .submitForm()
+                .submitForm();
+        registrationPage
                 .waitModalWindowIsOpened()
                 .checkModalWindowHasText(List.of(firstName, lastName, phone, gender));
     }
