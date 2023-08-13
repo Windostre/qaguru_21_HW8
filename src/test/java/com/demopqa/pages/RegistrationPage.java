@@ -20,21 +20,21 @@ public class RegistrationPage {
 
     CalendarComponent calendar = new CalendarComponent();
     SelenideElement firstNameInput = $("#firstName"),  //убарть лишние selenide element
-     lastNameInput = $("#lastName"),
-     emailInput = $("#userEmail"),
-     userNumberInput = $("#userNumber"),
-     genderRadioButton = $("#genterWrapper"),
-     submitButton = $("#submit"),
-     modalWindow = $(".modal-dialog"),
-     modalWindowHeader = $("#example-modal-sizes-title-lg"),
-     tableInModalWindow = $(".table-responsive"),
-     subjectInput = $("#subjectsInput"),
-     hobbiesCheckBox = $("#hobbiesWrapper"),
-     addressInput = $("#currentAddress"),
-     stateDropDown = $("#state"),
-     cityDropDown = $("#city"),
-     stateCityWrapper = $("#stateCity-wrapper"),
-     dateOfBirthInput = $("#dateOfBirthInput");
+            lastNameInput = $("#lastName"),
+            emailInput = $("#userEmail"),
+            userNumberInput = $("#userNumber"),
+            genderRadioButton = $("#genterWrapper"),
+            submitButton = $("#submit"),
+            modalWindow = $(".modal-dialog"),
+            modalWindowHeader = $("#example-modal-sizes-title-lg"),
+            tableInModalWindow = $(".table-responsive"),
+            subjectInput = $("#subjectsInput"),
+            hobbiesCheckBox = $("#hobbiesWrapper"),
+            addressInput = $("#currentAddress"),
+            stateDropDown = $("#state"),
+            cityDropDown = $("#city"),
+            stateCityWrapper = $("#stateCity-wrapper"),
+            dateOfBirthInput = $("#dateOfBirthInput");
 
     public RegistrationPage setFirstName(String firstName) {
         firstNameInput.setValue(firstName);
@@ -99,7 +99,7 @@ public class RegistrationPage {
 
     public RegistrationPage openPage(String url) {
         Selenide.open(url);
-               return this;
+        return this;
     }
 
     public RegistrationPage removeBannerAndFooter() {

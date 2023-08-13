@@ -14,13 +14,6 @@ public class RandomUtils {
     private final Faker faker = new Faker();
     private final Random random = new Random();
 
-    public static void main(String[] args) {
-        RandomUtils randomUtils = new RandomUtils();
-
-        System.out.println(randomUtils.getRandomSubject());
-
-    }
-
     public String getRandomString(int len) {
         String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         SecureRandom rnd = new SecureRandom();
@@ -32,7 +25,6 @@ public class RandomUtils {
 
     public String getRandomEmail(int len) {
         return getRandomString(len) + '@' + getRandomString(5) + '.' + getRandomString(3);
-        //return String.format("%s@%s.%s", getRandomString(15), getRandomString(5), getRandomString(5));
     }
 
     public int getRandomInt(int min, int max) {
@@ -46,7 +38,6 @@ public class RandomUtils {
     public String getRandomGender() {
         String[] genders = {"Male", "Female", "Other"};
         return getRandomItemFromArray(genders);
-
     }
 
     public String getRandomItemFromArray(String[] array) {
@@ -71,9 +62,7 @@ public class RandomUtils {
     }
 
     public String getRandomSubject() {
-        String[] subjects = {"Hindi", "English", "Maths", "Physics", "Chemistry",
-                "Biology", "Computer Scienc", "Commerce", "Accounting", "Economics",
-                "Arts", "Social Studies", "History", "Civics"};
+        String[] subjects = {"Hindi", "English", "Maths", "Physics", "Chemistry", "Biology", "Computer Science", "Commerce", "Accounting", "Economics", "Arts", "Social Studies", "History", "Civics"};
         return faker.options().option(subjects);
     }
 
